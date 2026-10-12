@@ -107,7 +107,8 @@ let DATA=[],cat="전체",escOnly=false;
 const $=id=>document.getElementById(id);
 const esc=s=>(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-function prep(rows){return rows.filter(r=>r["질문"]).map(r=>{
+function prep(rows){return rows.filter(r=>r["질문"]).map((r,i)=>{
+  r={...r,"카테고리":r["카테고리"]||"미분류","ID":r["ID"]||("행"+(i+2))};
   const hay=[r["질문"],r["키워드"],r["핵심"],r["답변"],r["카테고리"]].join(" ");
   return {...r,_n:norm(hay),_c:toCho(norm(hay)),_qn:norm(r["질문"]+" "+r["키워드"])}})}
 
